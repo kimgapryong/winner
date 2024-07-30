@@ -169,12 +169,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDatas:
   - enemyobj: {fileID: 3262819453170258691, guid: 603ebd91f37f57a4e8cc5c66214975ae, type: 3}
+    name: enemy1
     health: 3
     speed: 2
   - enemyobj: {fileID: 2280811276229100709, guid: 592ca7f6b68c8b341ab3bdc5ae1febec, type: 3}
-    health: 5
-    speed: 4
+    name: enemy2
+    health: 2
+    speed: 3.5
   - enemyobj: {fileID: 2746450744898956928, guid: 04554f9f10015984c9c0b7c6feb35cfb, type: 3}
+    name: enemy3
     health: 8
     speed: 1
 --- !u!1 &477425448

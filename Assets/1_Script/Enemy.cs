@@ -9,37 +9,41 @@ public class Enemy : MonoBehaviour
     public struct enemyData
     {
         public GameObject enemyobj;
+        public string name;
         public int health;
         public float speed;
 
     }
-    [SerializeField]private enemyData[] enemyDatas;
+    public enemyData[] enemyDatas;
 
     private void Start()
     {
         StartCoroutine(RandomSpwaner());
     }
 
-
     private void EnemyCreate()
     {
-        int RandomValue = Random.Range(0, enemyDatas.Length);
+        int value = 0;
+        int RandomValue = Random.Range(0, 100);
         float newX = Random.Range(-2f, 2f), newY = Random.Range(7f, 9f);
-        GameObject clone = Instantiate(enemyDatas[RandomValue].enemyobj, new Vector3(newX, newY), Quaternion.identity);
+        if(RandomValue <= 60)
+        {
+            value = 0;
+        }else if(RandomValue <= 90)
+        {
+            value = 1;
+        }
+        else
+        {
+            value = 2;
+        }
+        GameObject clone = Instantiate(enemyDatas[value].enemyobj, new Vector3(newX, newY), Quaternion.identity);
         if(clone != null )
         {
             Rigidbody2D rigid = clone.AddComponent<Rigidbody2D>();
             CircleCollider2D collider =  clone.AddComponent<CircleCollider2D>();
-            collider.isTrigger = true;
-            rigid.gravityScale = 0;
-            rigid.constraints = (RigidbodyConstraints2D)RigidbodyConstraints.FreezeRotationZ;
             clone.AddComponent<EnemyDestroy>();
-            
-            if(clone.transform.position.y >= -5)
-            {
-                rigid.velocity = new Vector2(0, -enemyDatas[RandomValue].speed);
-            }
-            
+            clone.gameObject.name = enemyDatas[value].name; 
         }
     } 
     

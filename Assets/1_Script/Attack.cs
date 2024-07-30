@@ -16,7 +16,7 @@ public class Attack : MonoBehaviour
         while (true)
         {
             Instantiate(bullet, transform.position, Quaternion.Euler(0,0,90));
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.3f);
         }
        
     }
