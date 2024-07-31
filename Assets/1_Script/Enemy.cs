@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
             Rigidbody2D rigid = clone.AddComponent<Rigidbody2D>();
             CircleCollider2D collider =  clone.AddComponent<CircleCollider2D>();
             clone.AddComponent<EnemyDestroy>();
+            clone.AddComponent<EnemyDieItem>();
             clone.gameObject.name = enemyDatas[value].name; 
         }
     } 
@@ -54,7 +55,7 @@ public class Enemy : MonoBehaviour
         while(true)
         {
             EnemyCreate();
-            yield return new WaitForSeconds(Random.Range(1f,1.5f));
+            yield return new WaitForSeconds(Random.Range(1.7f,2f));
             
         }
     }

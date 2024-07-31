@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Items : MonoBehaviour
+public abstract class Items : MonoBehaviour
 {
-    [System.Serializable]
-    public struct ItemObj
+    protected string itemName;
+    public string ItemName
     {
-
+        get { return itemName; }
+        set { itemName = value; }
     }
+    protected abstract void MoveItem();
 }

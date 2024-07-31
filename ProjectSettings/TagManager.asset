@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Projectile
   - Enemy
+  - Bullet
+  - Item
+  - ItemEvent
   layers:
   - Default
   - TransparentFX

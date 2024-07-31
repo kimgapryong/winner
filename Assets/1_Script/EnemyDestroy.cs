@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,21 +8,23 @@ public class EnemyDestroy : MonoBehaviour
     private Enemy enemyScript;
     private Rigidbody2D rb;
     private CircleCollider2D circleCollider;
-    
-    private Bullet bulletScript;
+    private EnemyDieItem enemyDieItem;
 
+    private UIManager uiManager;
     public int health;
     public float speed;
 
     private bool bulletAttack = true;
+
+    
     private void Start()
     {
+        uiManager = FindObjectOfType<UIManager>();
+        enemyDieItem = GetComponent<EnemyDieItem>();
         enemyScript = GameObject.Find("enemyCreate").GetComponent<Enemy>();
         rb = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
-        GetHealth();
-
-        
+        health = GetHealth();
     }
     private void Update()
     {
@@ -52,16 +55,17 @@ public class EnemyDestroy : MonoBehaviour
         }
     }
     
-    public void GetHealth()
+    public int GetHealth()
     {
         for (int i = 0; i < enemyScript.enemyDatas.Length; i++)
         {
             if (gameObject.name == enemyScript.enemyDatas[i].name)
             {
-                health = enemyScript.enemyDatas[i].health;
-                speed = enemyScript.enemyDatas[i].speed;
+                return enemyScript.enemyDatas[i].health;
             }
         }
+
+        return 0;
     }
     private void EnemyDelete()
     {
@@ -79,14 +83,15 @@ public class EnemyDestroy : MonoBehaviour
             {
                 bulletAttack = false;
                 Destroy(collision.gameObject);
-                if (health != 0)
+                if (health > 0)
                 {
                     health--;
                     StartCoroutine(enemyTarget(gameObject));
-                    
                 }
                 else
                 {
+                    uiManager.score += GetHealth() ;
+                    enemyDieItem.ItemCreate();
                     Destroy(gameObject);
                 }
                 
@@ -96,6 +101,9 @@ public class EnemyDestroy : MonoBehaviour
 
         }
     }
+
+    
+  
 
     private IEnumerator enemyTarget(GameObject obj)
     {

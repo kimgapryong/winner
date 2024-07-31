@@ -24,39 +24,44 @@ public class shipMover : MonoBehaviour
         float moveX = 0f;
         float moveY = 0f;
 
-        if (Input.GetKey(KeyCode.A))
+        if(transform.gameObject != null)
         {
-            moveX = -speed;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            moveX = speed;
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveX = -speed;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                moveX = speed;
+            }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveY = speed;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            moveY = -speed;
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveY = speed;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                moveY = -speed;
+            }
 
-        Vector2 moveVector = new Vector2(moveX, moveY);
+            Vector2 moveVector = new Vector2(moveX, moveY);
 
-        if (moveVector.magnitude > maxSpeed)
-        {
-            moveVector = moveVector.normalized * maxSpeed;
+            if (moveVector.magnitude > maxSpeed)
+            {
+                moveVector = moveVector.normalized * maxSpeed;
+            }
+
+            rigid.velocity = moveVector;
+
+            if (transform.position.y <= -5)
+            {
+                transform.position = new Vector2(transform.position.x, -5);
+            }
+            else if (transform.position.y >= 5)
+            {
+                transform.position = new Vector2(transform.position.x, 5);
+            }
         }
-
-        rigid.velocity = moveVector;
-
-        if(transform.position.y <= -5)
-        {
-            transform.position = new Vector2(transform.position.x, -5);
-        }else if(transform.position.y >= 5)
-        {
-            transform.position = new Vector2(transform.position.x, 5);
-        }
+        
     }
 }
