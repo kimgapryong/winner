@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    private shipHealth shipHealth;
+    public UIManager uiManager;
     public Attack attack;
 
     private void Awake()
@@ -44,9 +44,9 @@ public class GameManager : MonoBehaviour
         GameObject ship2 = GameObject.Find("ship2");
         if (ship2 != null)
         {
-            shipHealth = ship2.GetComponent<shipHealth>();
+           uiManager = GameObject.Find("UiManager").GetComponent<UIManager>();
             attack = ship2.GetComponentInChildren<Attack>();
-            if (shipHealth == null)
+            if (uiManager == null)
             {
                 Debug.LogError("shipHealth component not found on ship2.");
             }

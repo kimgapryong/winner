@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
         {
             if(healthSlider.value > 0)
             {
-                healthSlider.value -= 0.002f;
+                healthSlider.value -= 0.001f;
                 yield return new WaitForSeconds(0.1f);
             }
             else

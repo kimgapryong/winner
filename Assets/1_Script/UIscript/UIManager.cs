@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     private GameObject over;
 
     [SerializeField]
-    private Text scoreTxt;
+    public Text scoreTxt;
 
     [SerializeField]
     private Text healthTxt;

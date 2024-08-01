@@ -16,6 +16,10 @@ public class Enemy : MonoBehaviour
     }
     public enemyData[] enemyDatas;
 
+    private const float ValueMinus = 1.4f;
+    private int scoreValue = 100;
+    private float minRand = 1.7f;
+    private float maxRand = 2f;
     private void Start()
     {
         StartCoroutine(RandomSpwaner());
@@ -56,8 +60,14 @@ public class Enemy : MonoBehaviour
         while(true)
         {
             EnemyCreate();
-            yield return new WaitForSeconds(Random.Range(1.7f,2f));
-            
+            if(GameManager.Instance.uiManager.score >= scoreValue)
+            {
+                scoreValue *= 2;
+                minRand -= ValueMinus;
+                maxRand -= ValueMinus;
+            }
+            yield return new WaitForSeconds(Random.Range(minRand, maxRand));
+
         }
     }
 }

@@ -52,6 +52,7 @@ public class shipHealth : MonoBehaviour
         
         yield return new WaitForSeconds(0.3f);
         objrenderer.enabled = true;
+        yield return new WaitForSeconds(0.4f);
         isAttack = true;
         
     }
