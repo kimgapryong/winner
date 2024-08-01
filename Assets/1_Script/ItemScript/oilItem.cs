@@ -37,7 +37,7 @@ public class oilItem : Items
             if(isItem)
             {
                 isItem = false;
-                healthBar.healthSlider.value += 0.05f;
+                healthBar.healthSlider.value += 0.07f;
                 Destroy(gameObject);
             }
         }

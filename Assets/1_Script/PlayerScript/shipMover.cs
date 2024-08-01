@@ -60,6 +60,13 @@ public class shipMover : MonoBehaviour
             else if (transform.position.y >= 5)
             {
                 transform.position = new Vector2(transform.position.x, 5);
+            }else if(transform.position.x <= -2.5)
+            {
+                transform.position = new Vector2(-2.5f, transform.position.y);
+            }
+            else if (transform.position.x >= 2.5)
+            {
+                transform.position = new Vector2(2.5f, transform.position.y);
             }
         }
         

@@ -10,5 +10,9 @@ public class EnemyBullet : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.down * 7f * Time.deltaTime);
+        if(transform.position.y <= -5)
+        {
+            Destroy(gameObject);
+        }
     }
 }

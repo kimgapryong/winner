@@ -39,7 +39,6 @@ public class shipHealth : MonoBehaviour
                     animator.SetBool("isDeath", true);
                     manager.health = 0;
                     StartCoroutine(WaitForAnimationToFinish());
-
                     shipDie?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -57,7 +56,7 @@ public class shipHealth : MonoBehaviour
         
     }
 
-    private IEnumerator WaitForAnimationToFinish()
+    public IEnumerator WaitForAnimationToFinish()
     {
         
         yield return new WaitForSeconds(deathClip.length);

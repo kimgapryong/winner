@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
             CircleCollider2D collider =  clone.AddComponent<CircleCollider2D>();
             clone.AddComponent<EnemyDestroy>();
             clone.AddComponent<EnemyDieItem>();
+            
             clone.gameObject.name = enemyDatas[value].name; 
         }
     } 

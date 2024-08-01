@@ -8,6 +8,7 @@ public class Enemy3Attack : MonoBehaviour
     [SerializeField]
     private GameObject bullet;
     private GameObject target;
+    
 
     private void Start()
     {
@@ -27,7 +28,6 @@ public class Enemy3Attack : MonoBehaviour
             Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, rotZ + 120));
             Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, rotZ + 60));
         }
-        
 
     }
 
