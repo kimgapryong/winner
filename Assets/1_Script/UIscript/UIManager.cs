@@ -17,21 +17,30 @@ public class UIManager : MonoBehaviour
     public Text scoreTxt;
 
     [SerializeField]
-    private Text healthTxt;
+    public Text healthTxt;
 
     [SerializeField]
     private Text ItemTxt;
 
-    private HealthBar slider;
+    public Image BossBody;
+    public GameObject BossRuncher;
+
+    //보스 체력바
+    public Slider bossHealth;
+
+    public HealthBar slider;
 
     private void Start()
     {
         shipHealth = FindObjectOfType<shipHealth>();
         slider = FindObjectOfType<HealthBar>();
-        health = shipHealth.health;
-        shipHealth.shipDie += ReStart;
         
+        health = shipHealth.health;
+
+        shipHealth.shipDie += ReStart;
         slider.oilDie += ReStart;
+
+        Debug.Log(health);
     }
 
     private void ReStart(object sender, EventArgs e)
@@ -44,7 +53,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         scoreTxt.text = String.Format("Score: {0:n0}", score);
-        healthTxt.text = $"목숨: {health}";
+        healthTxt.text = $"생명: {health}";
         ItemTxt.text = $"아이템: {GameManager.Instance.attack.runcherValue}";
     }
 

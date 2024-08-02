@@ -14,9 +14,39 @@ public class Enemy : MonoBehaviour
         public float speed;
 
     }
+
+    [System.Serializable]
+    public struct bossData
+    {
+        public GameObject bossobj;
+        public int health;
+       
+    }
+
+
+    public bossData[] bossDatas;
     public enemyData[] enemyDatas;
 
-    private const float ValueMinus = 1.4f;
+    public bossData SetBossData(BossCheckClass.Boss bossType)
+    {
+        switch(bossType)
+        {
+            case BossCheckClass.Boss.Boss1:
+                
+                return bossDatas[0];
+                
+            case BossCheckClass.Boss.Boss2:
+                
+                return bossDatas[1];
+            default:
+                return new bossData();
+        }
+        
+    }
+
+    
+
+    private const float ValueMinus = 0.3f;
     private int scoreValue = 100;
     private float minRand = 1.7f;
     private float maxRand = 2f;
@@ -30,10 +60,10 @@ public class Enemy : MonoBehaviour
         int value = 0;
         int RandomValue = Random.Range(0, 100);
         float newX = Random.Range(-2f, 2f), newY = Random.Range(7f, 9f);
-        if(RandomValue <= 60)
+        if(RandomValue <= 70)
         {
             value = 0;
-        }else if(RandomValue <= 90)
+        }else if(RandomValue <= 95)
         {
             value = 1;
         }

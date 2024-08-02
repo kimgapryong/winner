@@ -6,6 +6,7 @@ using UnityEngine;
 public class shipHealth : MonoBehaviour
 {
     public int health = 3;
+
     private bool isAttack = true;
     private Renderer objrenderer;
     private Animator animator;
@@ -23,7 +24,7 @@ public class shipHealth : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
         {
             if(isAttack)
             {
@@ -44,15 +45,40 @@ public class shipHealth : MonoBehaviour
             }
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Boss"))
+        {
+            if (isAttack)
+            {
+                isAttack = false;
+                if (health > 0)
+                {
+                    health--;
+                    manager.health = health;
+                    StartCoroutine(IsAttackSecond());
+                }
+                else
+                {
+                    animator.SetBool("isDeath", true);
+                    manager.health = 0;
+                    StartCoroutine(WaitForAnimationToFinish());
+                    shipDie?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+    }
 
     private IEnumerator IsAttackSecond()
     {
-        objrenderer.enabled = false;
-
+        for(int i = 0; i < 5; i++)
+        {
+            objrenderer.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            objrenderer.enabled = true;
+            yield return new WaitForSeconds(0.2f);
+        }
         
-        yield return new WaitForSeconds(0.3f);
-        objrenderer.enabled = true;
-        yield return new WaitForSeconds(0.4f);
         isAttack = true;
         
     }

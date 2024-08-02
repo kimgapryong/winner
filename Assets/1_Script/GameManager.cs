@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public UIManager uiManager;
     public Attack attack;
+    public Enemy enemy;
 
     private void Awake()
     {
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
         {
            uiManager = GameObject.Find("UiManager").GetComponent<UIManager>();
             attack = ship2.GetComponentInChildren<Attack>();
+            enemy = GameObject.Find("enemyCreate").GetComponent<Enemy>();
             if (uiManager == null)
             {
                 Debug.LogError("shipHealth component not found on ship2.");
@@ -53,6 +55,10 @@ public class GameManager : MonoBehaviour
             if (attack == null)
             {
                 Debug.LogError("Attack component not found in children of ship2.");
+            }
+            if(enemy == null)
+            {
+                Debug.LogError("Enemy component not found in children of ship2.");
             }
         }
         else
