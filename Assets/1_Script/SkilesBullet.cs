@@ -17,6 +17,7 @@ public class SkilesBullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            GameManager.Instance.uiManager.score += collision.GetComponent<EnemyDestroy>().health;
             Destroy(collision.gameObject);
         }
     }

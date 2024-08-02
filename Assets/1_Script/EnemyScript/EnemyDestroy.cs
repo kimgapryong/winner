@@ -11,6 +11,7 @@ public class EnemyDestroy : MonoBehaviour
     private EnemyDieItem enemyDieItem;
 
     private UIManager uiManager;
+
     public int health;
     public float speed;
 
