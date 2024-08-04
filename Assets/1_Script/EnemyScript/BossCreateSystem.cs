@@ -37,7 +37,7 @@ public class BossCreateSystem : MonoBehaviour
 
     private void CheckScore()
     {
-        if(manager.score >= 10 && !isBossImageSpwanStarted)
+        if(manager.score >= 150 && !isBossImageSpwanStarted)
         {
             //나중에 다시 활성화 시켜야 할 것
             enemycreate.SetActive(false);

@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
     
 
     private const float ValueMinus = 0.3f;
-    private int scoreValue = 100;
+    private int scoreValue = 45;
     private float minRand = 1.7f;
     private float maxRand = 2f;
     private void Start()

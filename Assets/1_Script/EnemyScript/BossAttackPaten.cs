@@ -19,10 +19,18 @@ public class BossAttackPaten : MonoBehaviour
         randomPaten = GetComponent<BossRandomPaten>();
     }
 
+    private void Update()
+    {
+        if(transform.gameObject == null)
+        {
+            uIManager.BossRuncher.gameObject.SetActive(false);
+            uIManager.BossBody.gameObject.SetActive(false);
+        }
+    }
+
     public IEnumerator BossRuncherAttack()
     {
-        if(transform.gameObject != null)
-        {
+        
             for (int i = 0; i < 3; i++)
             {
                 uIManager.BossRuncher.SetActive(false);
@@ -35,19 +43,15 @@ public class BossAttackPaten : MonoBehaviour
 
             Instantiate(BossRuncher, new Vector3(2, transform.position.y, 0), Quaternion.identity);
             Instantiate(BossRuncher, new Vector3(-2, transform.position.y, 0), Quaternion.identity);
-        }
-        else
-        {
-            uIManager.BossRuncher.gameObject.SetActive(false);
-        }
+        
+       
        
         
         
     }
     public IEnumerator Bossbodytor()
     {
-        if(transform.gameObject != null)
-        {
+      
             for (int i = 0; i < 3; i++)
             {
                 uIManager.BossBody.gameObject.SetActive(false);
@@ -58,12 +62,8 @@ public class BossAttackPaten : MonoBehaviour
             uIManager.BossBody.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.7f);
             randomPaten.isMove = true;
-        }
-        else
-        {
-            uIManager.BossBody.gameObject.SetActive(false) ;
-        }
-       
+        
+     
 
     }
 
