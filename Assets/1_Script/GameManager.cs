@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,10 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public Attack attack;
     public Enemy enemy;
-
+    public GameObject ship2;
+    public bool isNext = false;
+    public BossContoral bossContoral;
+    public bool GameStage = false;
     private void Awake()
     {
         if (Instance == null)
@@ -38,16 +42,37 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitializeReferences();
+        if(bossContoral != null)
+        {
+            Debug.Log("됐다");
+            bossContoral.BossDie += StartBossDie;
+        }
+        else
+        {
+            Debug.Log("문제 발생");
+        }
+        
+    }
+
+    public void StartBossDie(object sender, EventArgs e)
+    {
+            StartCoroutine(LoadNextStage());
     }
 
     private void InitializeReferences()
     {
-        GameObject ship2 = GameObject.Find("ship2");
+        ship2 = GameObject.Find("ship2");
+
         if (ship2 != null)
         {
+            bossContoral = GameObject.Find("BossCreate").GetComponent<BossContoral>();
            uiManager = GameObject.Find("UiManager").GetComponent<UIManager>();
+            DontDestroyOnLoad (uiManager.gameObject);
+
             attack = ship2.GetComponentInChildren<Attack>();
+
             enemy = GameObject.Find("enemyCreate").GetComponent<Enemy>();
+            
             if (uiManager == null)
             {
                 Debug.LogError("shipHealth component not found on ship2.");
@@ -65,5 +90,23 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("ship2 GameObject not found.");
         }
+    }
+
+
+    public IEnumerator LoadNextStage()
+    {
+        yield return new WaitForSeconds(3);
+        
+        while (ship2.transform.position.y <= 4.5f)
+        {
+            ship2.transform.Translate(Vector2.up * 5f * Time.deltaTime);
+            yield return null;
+        }
+        enemy.gameObject.SetActive(true);   
+        Destroy(uiManager.BossBody);
+        Destroy(uiManager.BossRuncher);
+        uiManager.bossHealth.gameObject.SetActive(false);
+        GameStage = true;
+        SceneManager.LoadScene("Stage2");
     }
 }

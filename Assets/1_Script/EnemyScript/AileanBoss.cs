@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleBoss : MonoBehaviour
+public class AileanBoss : MonoBehaviour
 {
     public BossCheckClass.Boss BossType;
     private Enemy.bossData bossData;
 
-    
+
     //GameManager 사용
     private UIManager uiManager;
     private Enemy enemyData;
@@ -19,7 +19,7 @@ public class CircleBoss : MonoBehaviour
 
     private void Start()
     {
-        BossType = BossCheckClass.Boss.Boss1;
+        BossType = BossCheckClass.Boss.Boss2;
 
         enemyData = GameManager.Instance.enemy;
         uiManager = GameManager.Instance.uiManager;
@@ -29,28 +29,26 @@ public class CircleBoss : MonoBehaviour
         maxHealth = bossData.health;
         currentHealth = maxHealth;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet") && isAttack)
         {
             isAttack = false;
-            if(bossData.health > 0)
+            if (bossData.health > 0)
             {
                 currentHealth--;
                 uiManager.bossHealth.value = (float)currentHealth / maxHealth;
                 bossData.health = currentHealth;
 
                 StartCoroutine(BossTimeCheck());
-                
+
             }
             else
             {
                 Debug.Log("보스 죽음");
-                GameManager.Instance.bossContoral.isDie = true;
-                Debug.Log(GameManager.Instance.bossContoral.isDie);
                 Destroy(gameObject);
-             
+
 
             }
             Destroy(collision.gameObject);
@@ -59,9 +57,8 @@ public class CircleBoss : MonoBehaviour
 
     private IEnumerator BossTimeCheck()
     {
-        
+
         yield return new WaitForSeconds(1f);
         isAttack = true;
     }
 }
-

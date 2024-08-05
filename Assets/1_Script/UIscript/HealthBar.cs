@@ -12,13 +12,16 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
+        
+        Transform slidrTrans = GameObject.Find("UiManager").transform.Find("HealthBar");
+        healthSlider = slidrTrans.GetComponent<Slider>();
         StartCoroutine(Hpdown());
     }
     private IEnumerator Hpdown()
     {
         while (true)
         {
-            if(healthSlider.value > 0)
+            if(healthSlider != null && healthSlider.value > 0)
             {
                 healthSlider.value -= 0.001f;
                 yield return new WaitForSeconds(0.1f);

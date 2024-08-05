@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
   
     public int score = 0;
     [SerializeField]
-    private GameObject over;
+    public GameObject over;
 
     [SerializeField]
     public Text scoreTxt;
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     //보스 체력바
     public Slider bossHealth;
-
+    public Image BossTxt;
     public HealthBar slider;
 
     private void Start()
@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
         shipHealth.shipDie += ReStart;
         slider.oilDie += ReStart;
 
-        Debug.Log(health);
+        
     }
 
     private void ReStart(object sender, EventArgs e)

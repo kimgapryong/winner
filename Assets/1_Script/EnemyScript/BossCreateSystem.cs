@@ -11,7 +11,12 @@ public class BossCreateSystem : MonoBehaviour
     private BossCheckClass.Boss BossType;
     private Enemy.bossData bossData;
 
+    //Stage1꺼
     private GameObject enemycreate;
+
+    //Stage2 꺼
+    private GameObject monstercreate;
+
     private GameObject oilBar;
     //GameManager 이용
 
@@ -27,7 +32,10 @@ public class BossCreateSystem : MonoBehaviour
         oilBar = GameObject.Find("oilBar");
         manager = GameManager.Instance.uiManager;
         Enemy = GameManager.Instance.enemy;
-        
+        BossTxt = GameManager.Instance.uiManager.BossTxt;
+        monstercreate = GameObject.Find("MonsterCreate");
+
+
     }
 
     private void Update()
@@ -37,7 +45,7 @@ public class BossCreateSystem : MonoBehaviour
 
     private void CheckScore()
     {
-        if(manager.score >= 150 && !isBossImageSpwanStarted)
+        if(manager.score >= 4 && !isBossImageSpwanStarted && !GameManager.Instance.GameStage)
         {
             //나중에 다시 활성화 시켜야 할 것
             enemycreate.SetActive(false);
@@ -48,10 +56,23 @@ public class BossCreateSystem : MonoBehaviour
             isBossImageSpwanStarted = true;
 
             //보스의 데이터 넘겨주기
+            
             BossType = BossCheckClass.Boss.Boss1;
             bossData = Enemy.SetBossData(BossType);
 
         
+        }else if(manager.score >= 10 && !isBossImageSpwanStarted && GameManager.Instance.GameStage)
+        {
+            enemycreate.SetActive(false);
+            monstercreate.SetActive(false);
+            oilBar.SetActive(false);
+
+            manager.bossHealth.gameObject.SetActive(true);
+            StartCoroutine(BossImageSpwan());
+            isBossImageSpwanStarted = true;
+
+            BossType = BossCheckClass.Boss.Boss2;
+            bossData = Enemy.SetBossData(BossType);
         }
     }
 
@@ -64,7 +85,15 @@ public class BossCreateSystem : MonoBehaviour
             BossTxt.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.6f);
         }
-        Instantiate(bossData.bossobj, new Vector3(0, 3.5f, 0), Quaternion.identity);
+        if(BossType == BossCheckClass.Boss.Boss1)
+        {
+            Instantiate(bossData.bossobj, new Vector3(0, 3.5f, 0), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(bossData.bossobj, new Vector3(0.18f, 10.4f, 0), Quaternion.identity);
+        }
+       
     }
 }
 public class BossCheckClass

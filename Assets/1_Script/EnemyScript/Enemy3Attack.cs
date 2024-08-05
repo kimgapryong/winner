@@ -22,6 +22,7 @@ public class Enemy3Attack : MonoBehaviour
     {
         if(target != null)
         {
+
             Vector2 newPos = target.transform.position - transform.position;
             float rotZ = Mathf.Atan2(newPos.y, newPos.x) * Mathf.Rad2Deg;
             Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, rotZ + 90));
