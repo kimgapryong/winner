@@ -39,6 +39,7 @@ public class shipHealth : MonoBehaviour
                 {
                     animator.SetBool("isDeath", true);
                     manager.health = 0;
+                    GameManager.Instance.Ranking.AddScores(GameManager.Instance.uiManager.score);
                     StartCoroutine(WaitForAnimationToFinish());
                     shipDie?.Invoke(this, EventArgs.Empty);
                 }
@@ -62,6 +63,7 @@ public class shipHealth : MonoBehaviour
                 {
                     animator.SetBool("isDeath", true);
                     manager.health = 0;
+                    GameManager.Instance.Ranking.AddScores(GameManager.Instance.uiManager.score);
                     StartCoroutine(WaitForAnimationToFinish());
                     shipDie?.Invoke(this, EventArgs.Empty);
                 }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public bool isNext = false;
     public BossContoral bossContoral;
     public bool GameStage = false;
+    public Ranking Ranking;
     private void Awake()
     {
         if (Instance == null)

@@ -47,6 +47,8 @@ public class AileanBoss : MonoBehaviour
             else
             {
                 Debug.Log("º¸½º Á×À½");
+                GameManager.Instance.enemy.gameObject.SetActive(true);
+                GameManager.Instance.uiManager.slider.gameObject.SetActive(true);
                 Destroy(gameObject);
 
 
