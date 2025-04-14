@@ -45,7 +45,7 @@ public class BossCreateSystem : MonoBehaviour
 
     private void CheckScore()
     {
-        if(manager.score >= 10 && !isBossImageSpwanStarted && !GameManager.Instance.GameStage)
+        if(manager.score >= 30 && !isBossImageSpwanStarted && !GameManager.Instance.GameStage)
         {
             //나중에 다시 활성화 시켜야 할 것
             enemycreate.SetActive(false);
@@ -61,7 +61,7 @@ public class BossCreateSystem : MonoBehaviour
             bossData = Enemy.SetBossData(BossType);
 
         
-        }else if(manager.score >= 20 && !isBossImageSpwanStarted && GameManager.Instance.GameStage)
+        }else if(manager.score >= 50 && !isBossImageSpwanStarted && GameManager.Instance.GameStage)
         {
             enemycreate.SetActive(false);
             monstercreate.SetActive(false);
