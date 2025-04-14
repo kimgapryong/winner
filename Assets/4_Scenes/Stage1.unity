@@ -3664,6 +3664,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6623245135153166910, guid: 04a622ef567600d4ca486d10a04f97e7, type: 3}
+      propertyPath: particel
+      value: 
+      objectReference: {fileID: 2962461365729841592, guid: 07fc20da6040cc246b496ca3f0d3d285, type: 3}
+    - target: {fileID: 6623245135153166910, guid: 04a622ef567600d4ca486d10a04f97e7, type: 3}
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 898032342110986561}

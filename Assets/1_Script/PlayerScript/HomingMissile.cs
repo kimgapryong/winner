@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class HomingMissile : MonoBehaviour
 {
+    public GameObject particel; // 전체 광역기;
+    
+
     public GameObject missilePrefab; // 미사일 프리팹
     public Transform firePoint; // 미사일 발사 위치
     public float missileSpeed = 5f;
@@ -14,8 +17,30 @@ public class HomingMissile : MonoBehaviour
         {
             StartCoroutine(FireMissiles());
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ParticelAttack();
+        }
     }
 
+
+    private void ParticelAttack()
+    {
+        GameObject clone = Instantiate(particel,transform.position, Quaternion.identity);
+        foreach(var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            enemy.GetComponent<EnemyDieItem>().ItemCreate();
+            Destroy(enemy);
+        }
+        Destroy(clone , 2);
+    }
+
+
+
+    
+
+
+    //파라 궁극기
     private IEnumerator FireMissiles()
     {
         for (int i = 0; i < 20; i++) // 5발 연속 발사
@@ -39,7 +64,8 @@ public class HomingMissile : MonoBehaviour
         while (time < 1)
         {
             time += Time.deltaTime * missileSpeed;
-            missile.transform.position = BezierCurve(start, control, end, time);
+            if(missile != null)
+                missile.transform.position = BezierCurve(start, control, end, time);
             yield return null;
         }
 

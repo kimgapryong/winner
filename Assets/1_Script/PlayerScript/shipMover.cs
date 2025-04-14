@@ -11,6 +11,7 @@ public class shipMover : MonoBehaviour
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        DontDestroyOnLoad(gameObject);
         
     }
 
