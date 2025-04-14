@@ -11,6 +11,12 @@ public class HomingMissile : MonoBehaviour
     public float missileSpeed = 5f;
     public float curveIntensity = 2f; // ÈÖ¾îÁü °­µµ
 
+    //-----
+    //3¹øÂ° ½ºÅ³
+    public GameObject bullet;
+    private bool isAtk;
+    private float time = 5;
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -21,8 +27,28 @@ public class HomingMissile : MonoBehaviour
         {
             ParticelAttack();
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            StartAtkBullet();
+        }
     }
 
+    private void StartAtkBullet()
+    {
+        if(isAtk) 
+            return; 
+
+        GameObject clone = Instantiate(bullet, transform.Find("ship2-flame"));
+        clone.transform.eulerAngles = new Vector3(0, 0, 90);
+        clone.AddLayer(time);
+        StartCoroutine(AtkBulletCool());
+    }
+    private IEnumerator AtkBulletCool()
+    {
+        isAtk = true;
+        yield return new WaitForSeconds(time);
+        isAtk = false;
+    }
 
     private void ParticelAttack()
     {
@@ -34,7 +60,7 @@ public class HomingMissile : MonoBehaviour
         }
         Destroy(clone , 2);
     }
-
+        
 
 
     
