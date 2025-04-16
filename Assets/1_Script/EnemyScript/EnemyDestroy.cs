@@ -83,7 +83,8 @@ public class EnemyDestroy : MonoBehaviour
             if (bulletAttack)
             {
                 bulletAttack = false;
-                Destroy(collision.gameObject);
+                if (collision.gameObject.GetComponent<LayerBullet>() == null)
+                    Destroy(collision.gameObject);
                 if (health > 0)
                 {
                     health--;
@@ -97,9 +98,6 @@ public class EnemyDestroy : MonoBehaviour
                 }
                 
             }
-            
-            
-
         }
     }
 

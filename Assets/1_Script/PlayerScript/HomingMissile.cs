@@ -40,6 +40,7 @@ public class HomingMissile : MonoBehaviour
 
         GameObject clone = Instantiate(bullet, transform.Find("ship2-flame"));
         clone.transform.eulerAngles = new Vector3(0, 0, 90);
+        clone.transform.localPosition = new Vector3(0, 0.5f, 0);
         clone.AddLayer(time);
         StartCoroutine(AtkBulletCool());
     }
