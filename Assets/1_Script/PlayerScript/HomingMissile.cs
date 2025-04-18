@@ -16,6 +16,12 @@ public class HomingMissile : MonoBehaviour
     public GameObject bullet;
     private bool isAtk;
     private float time = 5;
+
+    //4번째 베리어 스킬
+    public static bool valier;
+    private float valierTime = 3f;
+    public GameObject ValierObj;
+    private Coroutine valierCor;
     
     private void Update()
     {
@@ -31,8 +37,29 @@ public class HomingMissile : MonoBehaviour
         {
             StartAtkBullet();
         }
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            StartVarier();
+        }
     }
+    private void StartVarier()
+    {
+        if (valierCor != null)
+            return;
 
+        GameObject clone = Instantiate(ValierObj, transform);
+        clone.transform.localPosition = Vector3.zero;
+
+        valierCor = StartCoroutine(EnumerValier(clone));
+    }
+    private IEnumerator EnumerValier(GameObject clone)
+    {
+        valier = true;
+        yield return new WaitForSeconds(valierTime);
+        Destroy(clone);
+        valier = false;
+        valierCor = null;
+    }
     private void StartAtkBullet()
     {
         if(isAtk) 

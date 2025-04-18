@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossDatas:
   - bossobj: {fileID: 4604475837345774643, guid: 2c6092f2597ade845b790f38eb3f1b2f, type: 3}
-    health: 50
+    health: 30
   - bossobj: {fileID: 1999809743016257677, guid: 1e7bf019be87fd14993ec814c6b81652, type: 3}
     health: 40
   enemyDatas:
@@ -3671,6 +3671,10 @@ PrefabInstance:
       propertyPath: particel
       value: 
       objectReference: {fileID: 2962461365729841592, guid: 07fc20da6040cc246b496ca3f0d3d285, type: 3}
+    - target: {fileID: 6623245135153166910, guid: 04a622ef567600d4ca486d10a04f97e7, type: 3}
+      propertyPath: ValierObj
+      value: 
+      objectReference: {fileID: 1891299685880622386, guid: 2ca9482be4e8e44499f4c6fbdbb7ad37, type: 3}
     - target: {fileID: 6623245135153166910, guid: 04a622ef567600d4ca486d10a04f97e7, type: 3}
       propertyPath: firePoint
       value: 

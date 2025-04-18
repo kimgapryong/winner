@@ -24,6 +24,9 @@ public class shipHealth : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(HomingMissile.valier == true)
+            return;
+
         if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
         {
             if(isAttack)
@@ -48,6 +51,9 @@ public class shipHealth : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (HomingMissile.valier == true)
+            return;
+
         if (collision.CompareTag("Boss"))
         {
             if (isAttack)
