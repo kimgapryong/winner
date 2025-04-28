@@ -1,22 +1,53 @@
+---
+marp: true
+footer: "Created by fls2134"
+paginate: true
+theme: gaia
+style: |
+  section { background: rgb(241, 237, 234); }
+  p { font-size: 24px; }
+  li { font-size: 18pt; }
+  h1 { font-size: 28pt; }
+  h2 { font-size: 24pt; font-weight: normal; }
+  h3 { font-size: 23pt; }
+  h4 { font-size: 22pt; }
+  h5 { font-size: 20pt; }
+  h6 { font-size: 18pt; }
+  table { font-size: 20px; }
+---
+
+# 6주차: Computer Vision
+
+## ✨ 이미지 밝기 조절
+
+### Goal
+- `cv.convertScaleAbs()`로 이미지 밝기 조절하는 방법 학습
+- `cv.createTrackbar()`, `cv.getTrackbarPos()`로 실시간 밝기 조절
+
+---
+
+## 💻 Code Demo
+
 ```python
-print("Hello World!")
-print("ChatGPT 최고")
+import cv2 as cv
+import numpy as np
 
-※ 위에는 ```python, 밑에도 ``` 이렇게 감싸는 거야. (따옴표 아님, 백틱)
+def nothing(x):
+    pass
 
-**언어 이름** (python, javascript 등) 써주면 하이라이트도 예쁘게 돼!
+img = cv.imread('lena.jpg')
+img = cv.resize(img, (500, 500))
+if img is None:
+    raise FileNotFoundError('lena.jpg 파일을 찾을 수 없습니다.')
 
----
+cv.namedWindow('Brightness Adjust')
+cv.createTrackbar('Beta', 'Brightness Adjust', 100, 200, nothing)
 
-### 4. 저장하고 커밋하기
+while True:
+    beta = cv.getTrackbarPos('Beta', 'Brightness Adjust') - 100
+    adjusted = cv.convertScaleAbs(img, alpha=1.0, beta=beta)
+    cv.imshow('Brightness Adjust', adjusted)
+    if cv.waitKey(1) & 0xFF == 27:
+        break
 
-수정 다 했으면:
-- GitHub 웹에서는 **"Commit changes"** 누르면 끝!
-- 로컬에서는 파일 저장 후 → `git add README.md` → `git commit -m "업데이트: 리드미 수정"` → `git push` 해주면 올라가.
-
----
-
-필요하면 내가 바로 예시용 `README.md` 코드 짜서 줄게!  
-너 프로젝트 이름이랑 설명해줄래? 🚀  
-(참고로, 멋진 배지(badge)나 테이블 같은 것도 넣을 수 있어 추가로 알려줄게!)  
-**추가 질문 있을까?** 🌟
+cv.destroyAllWindows()
